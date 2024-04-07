@@ -1,0 +1,36 @@
+.room-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  flex-direction: row;
+  gap: 10px;
+  width: 80%;
+  margin-top: 20px;
+}
+
+.room {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+  transition: transform 0.3s ease;
+  width: 150px;
+}
+
+.room:hover {
+  transform: translateY(-20px);
+}
+
+.room-available {
+  background-color: lawngreen;
+}
+
+.room-occupied {
+  background-color: red;
+}
