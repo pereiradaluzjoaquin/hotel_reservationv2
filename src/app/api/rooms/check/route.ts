@@ -21,18 +21,25 @@ export const GET = async (request: NextRequest) => {
       ],
     });
 
-    const reserveRoomIds = existingReservations.map(
-      (reservation) => reservation.roomId
+    const reserveRoomIds = existingReservations.map((reservation) =>
+      reservation.roomId.toString()
     );
+
+    console.log("reserveRoomIds", reserveRoomIds);
 
     const allRooms = await RoomModel.find({ room_type: roomType });
 
+    console.log("allRooms", allRooms);
+
     const roomsWithStatus = allRooms.map((room) => {
-      if (reserveRoomIds.includes(room._id)) {
+      if (reserveRoomIds.includes(room._id.toString())) {
+        console.log("roomIncluded", room);
         return { ...room.toJSON(), status: "occupied" };
       }
       return { ...room.toJSON(), status: "available" };
     });
+
+    console.log("roomWithStatus", roomsWithStatus);
 
     return NextResponse.json(
       { rooms: roomsWithStatus, message: "Check available rooms" },

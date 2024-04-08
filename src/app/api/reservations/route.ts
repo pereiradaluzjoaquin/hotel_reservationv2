@@ -20,8 +20,6 @@ export const POST = async (request: Request) => {
     });
 
     console.log("room id", roomId);
-    //update status room
-    await RoomModel.findByIdAndUpdate(roomId, { status: "occupied" });
 
     return NextResponse.json(
       { message: "Reservation created" },

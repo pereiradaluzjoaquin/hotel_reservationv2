@@ -6,9 +6,13 @@ import { Room } from "../models/Room";
 
 type RoomReservationProps = {
   onRoomsReceived: (rooms: Room[], checkIn: string, checkOut: string) => void;
+  loading: (loading: boolean) => void;
 };
 
-export const RoomReservation = ({ onRoomsReceived }: RoomReservationProps) => {
+export const RoomReservation = ({
+  onRoomsReceived,
+  loading,
+}: RoomReservationProps) => {
   const todayDate = new Date().toISOString().split("T")[0];
   const [formData, setFormData] = useState({
     checkIn: "",
@@ -38,6 +42,7 @@ export const RoomReservation = ({ onRoomsReceived }: RoomReservationProps) => {
     event.preventDefault();
     console.log("Form submitted");
     console.log(formData);
+    loading(true);
     const response = await fetch(
       `/api/rooms/check?checkIn=${formData.checkIn}&checkOut=${formData.checkOut}&roomType=${formData.roomType}`
     );

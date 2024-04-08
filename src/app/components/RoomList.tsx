@@ -4,16 +4,6 @@ import { Room } from "../models/Room";
 import "./RoomList.css";
 import { RoomDetails } from "./RoomDetails";
 
-const getAllRooms = async () => {
-  const response = await fetch("http://localhost:3000/api/rooms");
-  if (!response.ok) {
-    throw new Error("Error fetching rooms");
-  }
-  const data = await response.json();
-  const { rooms } = data;
-  return rooms as Room[];
-};
-
 type RoomListProps = {
   rooms: Room[];
   checkIn: string;

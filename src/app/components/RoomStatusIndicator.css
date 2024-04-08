@@ -1,0 +1,25 @@
+.room-status-indicator {
+  list-style-type: none;
+  padding: 0;
+}
+
+.room-status-indicator-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.room-status-indicator-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.room-status-indicator-available {
+  background-color: lawngreen;
+}
+
+.room-status-indicator-occupied {
+  background-color: red;
+}
