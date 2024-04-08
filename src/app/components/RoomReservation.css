@@ -13,3 +13,9 @@
   color: white;
   cursor: pointer;
 }
+
+@media screen and (max-width: 821px) {
+  .room-reservation-container {
+    flex-direction: column;
+  }
+}

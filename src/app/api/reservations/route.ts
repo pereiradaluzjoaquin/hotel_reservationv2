@@ -7,6 +7,8 @@ import { NextResponse } from "next/server";
 export const GET = async () => {
   await dbConnect();
   try {
+    Room;
+    Customer;
     const reservations = await ReservationModel.find()
       .populate("roomId")
       .populate("customerId")

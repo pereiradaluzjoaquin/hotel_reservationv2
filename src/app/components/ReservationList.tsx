@@ -56,7 +56,7 @@ export const ReservationList = () => {
   );
 
   return (
-    <div>
+    <div className="reservation-container">
       {loading && <p>Loading...</p>}
       <input
         className="reservation-input-search"
@@ -65,38 +65,40 @@ export const ReservationList = () => {
         value={searchName}
         onChange={(e) => setSearchName(e.target.value)}
       />
-      <table className="reservation-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Room Number</th>
-            <th>Check In</th>
-            <th>Check Out</th>
-            <th>Customer Name</th>
-            <th>Customer Email</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredReservations.map((reservation) => (
-            <tr key={reservation._id.toString()}>
-              <td>{reservation._id.toString()}</td>
-              <td>{reservation.roomId.room_number}</td>
-              <td>{new Date(reservation.checkIn).toLocaleDateString()}</td>
-              <td>{new Date(reservation.checkOut).toLocaleDateString()}</td>
-              <td>{reservation.customerId.name}</td>
-              <td>{reservation.customerId.email}</td>
-              <td>
-                <button
-                  onClick={() => handleDeleteReservation(reservation._id)}
-                >
-                  Delete
-                </button>
-              </td>
+      <div className="reservation-table-container">
+        <table className="reservation-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Room Number</th>
+              <th>Check In</th>
+              <th>Check Out</th>
+              <th>Customer Name</th>
+              <th>Customer Email</th>
+              <th></th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {filteredReservations.map((reservation) => (
+              <tr key={reservation._id.toString()}>
+                <td>{reservation._id.toString()}</td>
+                <td>{reservation.roomId.room_number}</td>
+                <td>{new Date(reservation.checkIn).toLocaleDateString()}</td>
+                <td>{new Date(reservation.checkOut).toLocaleDateString()}</td>
+                <td>{reservation.customerId.name}</td>
+                <td>{reservation.customerId.email}</td>
+                <td>
+                  <button
+                    onClick={() => handleDeleteReservation(reservation._id)}
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
