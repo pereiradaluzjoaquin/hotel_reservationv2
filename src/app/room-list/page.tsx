@@ -21,7 +21,7 @@ const List = async () => {
   return (
     <div className="container">
       <h1 className="room-list-title">Room List</h1>
-      <RoomList rooms={rooms} checkIn="" checkOut="" />
+      <RoomList rooms={rooms} checkIn="" checkOut="" noDetails={true} />
     </div>
   );
 };

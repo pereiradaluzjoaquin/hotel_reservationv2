@@ -8,9 +8,15 @@ type RoomListProps = {
   rooms: Room[];
   checkIn: string;
   checkOut: string;
+  noDetails: boolean;
 };
 
-export const RoomList = ({ rooms, checkIn, checkOut }: RoomListProps) => {
+export const RoomList = ({
+  rooms,
+  checkIn,
+  checkOut,
+  noDetails = false,
+}: RoomListProps) => {
   const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
 
   const onModalClose = () => {
@@ -32,7 +38,7 @@ export const RoomList = ({ rooms, checkIn, checkOut }: RoomListProps) => {
           <p>Price: ${room.price_per_night}</p>
         </div>
       ))}
-      {selectedRoom && (
+      {selectedRoom && !noDetails && (
         <RoomDetails
           room={selectedRoom}
           checkIn={checkIn}

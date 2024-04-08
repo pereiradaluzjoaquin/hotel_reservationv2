@@ -3,6 +3,21 @@ import RoomModel from "@/app/models/Room";
 import { dbConnect } from "@/dbConnect";
 import { NextResponse } from "next/server";
 
+export const GET = async () => {
+  await dbConnect();
+  try {
+    const reservations = await ReservationModel.find();
+    console.log("reservations", reservations);
+    return NextResponse.json(reservations);
+  } catch (error) {
+    console.log("Error fetching reservations", error);
+    return NextResponse.json(
+      { message: "Error fetching reservations" },
+      { status: 500 }
+    );
+  }
+};
+
 export const POST = async (request: Request) => {
   await dbConnect();
   try {
