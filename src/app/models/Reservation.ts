@@ -1,11 +1,13 @@
 import mongoose, { ObjectId, Schema } from "mongoose";
+import { Room } from "./Room";
+import { Customer } from "./Customer";
 
 export type Reservation = {
   _id: ObjectId;
   checkIn: Date;
   checkOut: Date;
-  roomId: ObjectId;
-  customerId: ObjectId;
+  roomId: Room;
+  customerId: Customer;
 };
 
 const ReservationSchema = new Schema<Reservation>({

@@ -1,12 +1,16 @@
+import Customer from "@/app/models/Customer";
 import ReservationModel, { Reservation } from "@/app/models/Reservation";
-import RoomModel from "@/app/models/Room";
+import Room from "@/app/models/Room";
 import { dbConnect } from "@/dbConnect";
 import { NextResponse } from "next/server";
 
 export const GET = async () => {
   await dbConnect();
   try {
-    const reservations = await ReservationModel.find();
+    const reservations = await ReservationModel.find()
+      .populate("roomId")
+      .populate("customerId")
+      .sort({ checkIn: 1 });
     console.log("reservations", reservations);
     return NextResponse.json(reservations);
   } catch (error) {
