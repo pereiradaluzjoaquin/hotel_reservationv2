@@ -11,7 +11,6 @@ export async function GET(
     const { id } = params;
 
     const room = await RoomModel.findById(id);
-    console.log("room", room);
     if (!room) {
       return NextResponse.json({ message: "Room not found" }, { status: 404 });
     }

@@ -22,7 +22,6 @@ export const RoomReservation = ({
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    console.log(name, value);
     setFormData({
       ...formData,
       [name]: value,
@@ -31,7 +30,6 @@ export const RoomReservation = ({
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const { name, value } = event.target;
-    console.log(name, value);
     setFormData({
       ...formData,
       [name]: value,
@@ -40,16 +38,12 @@ export const RoomReservation = ({
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    console.log("Form submitted");
-    console.log(formData);
     loading(true);
     const response = await fetch(
       `/api/rooms/check?checkIn=${formData.checkIn}&checkOut=${formData.checkOut}&roomType=${formData.roomType}`
     );
     const data = await response.json();
-    console.log(data);
     const rooms: Room[] = data.rooms;
-    console.log(rooms);
     onRoomsReceived(rooms, formData.checkIn, formData.checkOut);
   };
 

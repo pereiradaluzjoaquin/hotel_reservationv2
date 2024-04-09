@@ -17,7 +17,6 @@ export default function Home() {
     checkIn: string,
     checkOut: string
   ) => {
-    console.log("Rooms received", rooms);
     setAvailableRooms(rooms);
     setCheckIn(checkIn);
     setCheckOut(checkOut);

@@ -13,7 +13,6 @@ export const GET = async () => {
       .populate("roomId")
       .populate("customerId")
       .sort({ checkIn: 1 });
-    console.log("reservations", reservations);
     return NextResponse.json(reservations);
   } catch (error) {
     console.log("Error fetching reservations", error);
@@ -31,16 +30,12 @@ export const POST = async (request: Request) => {
 
     const { checkIn, checkOut, roomId, customerId } = body as Reservation;
 
-    console.log("llamando api reservations");
-
     await ReservationModel.create({
       checkIn,
       checkOut,
       roomId,
       customerId,
     });
-
-    console.log("room id", roomId);
 
     return NextResponse.json(
       { message: "Reservation created" },

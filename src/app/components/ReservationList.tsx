@@ -13,7 +13,6 @@ const getReservations = async () => {
     throw new Error("Error fetching reservations");
   }
   const data = await response.json();
-  console.log("data", data);
   return data as Reservation[];
 };
 
@@ -33,7 +32,6 @@ export const ReservationList = () => {
   }, []);
 
   const handleDeleteReservation = async (id: ObjectId) => {
-    console.log("Delete reservation", id);
     const response = await fetch(
       `http://localhost:3000/api/reservations/${id}`,
       {
@@ -44,7 +42,6 @@ export const ReservationList = () => {
       throw new Error("Error deleting reservation");
     }
     const data = await response.json();
-    console.log("data", data);
     const updatedReservations = reservations.filter(
       (reservation) => reservation._id !== id
     );

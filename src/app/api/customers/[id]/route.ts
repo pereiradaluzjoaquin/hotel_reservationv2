@@ -11,7 +11,6 @@ export async function GET(
     const { id } = params;
 
     const customer = await CustomerModel.findById(id);
-    console.log("customer", customer);
     if (!customer) {
       return NextResponse.json(
         { message: "Customer not found" },

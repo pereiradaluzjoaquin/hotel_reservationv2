@@ -14,7 +14,6 @@ export const GET = async (
     const reservation = await ReservationModel.findOne({ roomId: id }).populate(
       "customerId"
     );
-    console.log("reservation", reservation);
     if (!reservation) {
       return NextResponse.json(
         { message: "Reservation not found" },

@@ -16,7 +16,6 @@ export const GET = async (
     const reservation = await ReservationModel.findById(id).populate(
       "customerId"
     );
-    console.log("reservationById", reservation);
     return NextResponse.json(reservation);
   } catch (error) {
     console.log("Error fetching reservation", error);

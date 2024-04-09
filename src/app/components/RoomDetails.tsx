@@ -40,7 +40,6 @@ export const RoomDetails = ({
   useEffect(() => {
     const fetchReservation = async () => {
       const reservation = await getReservationByRoomId(room._id);
-      console.log("reservationByRoomId", reservation);
       if (!reservation) {
         return;
       }
@@ -63,7 +62,6 @@ export const RoomDetails = ({
   }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.name, event.target.value);
     setFormData({
       ...formData,
       [event.target.name]: event.target.value,
@@ -72,7 +70,6 @@ export const RoomDetails = ({
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(formData);
     const responseCustomer = await fetch(
       "http://localhost:3000/api/customers",
       {
@@ -83,11 +80,8 @@ export const RoomDetails = ({
         body: JSON.stringify(formData),
       }
     );
-    console.log("reponse customer", responseCustomer);
     const data = await responseCustomer.json();
-    console.log("data", data);
     const customer = data.customer as Customer;
-    console.log("customer", customer);
     const responseReservation = await fetch(
       "http://localhost:3000/api/reservations",
       {
@@ -103,9 +97,7 @@ export const RoomDetails = ({
         }),
       }
     );
-    console.log("response reservation", responseReservation);
     const dataReservation = await responseReservation.json();
-    console.log("data reservation", dataReservation);
     onClosed();
   };
 
