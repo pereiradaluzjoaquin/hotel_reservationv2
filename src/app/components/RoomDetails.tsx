@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Room } from "../models/Room";
 import "./RoomDetails.css";
 import { Customer } from "../models/Customer";
+import { ObjectId } from "mongoose";
+import { Reservation } from "../models/Reservation";
 
 type RoomDetailsProps = {
   room: Room;
@@ -12,18 +14,53 @@ type RoomDetailsProps = {
   onClosed: () => void;
 };
 
+const getReservationByRoomId = async (roomId: ObjectId) => {
+  const response = await fetch(
+    `http://localhost:3000/api/reservations/room/${roomId}`
+  );
+  const data = await response.json();
+  const { reservation } = data;
+  return reservation as Reservation;
+};
+
 export const RoomDetails = ({
   room,
   checkIn,
   checkOut,
   onClosed,
 }: RoomDetailsProps) => {
+  const [disabled, setDisabled] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     lastname: "",
     email: "",
     phone: "",
   });
+
+  useEffect(() => {
+    const fetchReservation = async () => {
+      const reservation = await getReservationByRoomId(room._id);
+      console.log("reservationByRoomId", reservation);
+      if (!reservation) {
+        return;
+      }
+      const {
+        customerId: { name, lastname, email, phone },
+      } = reservation;
+
+      if (name && lastname && email && phone) {
+        setDisabled(true);
+      }
+
+      setFormData({
+        name,
+        lastname,
+        email,
+        phone,
+      });
+    };
+    fetchReservation();
+  }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     console.log(event.target.name, event.target.value);
@@ -131,6 +168,7 @@ export const RoomDetails = ({
                 value={formData.name}
                 onChange={handleChange}
                 required
+                readOnly={disabled}
               />
               <label htmlFor="lastname">Lastname</label>
               <input
@@ -140,6 +178,7 @@ export const RoomDetails = ({
                 value={formData.lastname}
                 onChange={handleChange}
                 required
+                readOnly={disabled}
               />
               <label htmlFor="email">Email</label>
               <input
@@ -149,6 +188,7 @@ export const RoomDetails = ({
                 value={formData.email}
                 onChange={handleChange}
                 required
+                readOnly={disabled}
               />
               <label htmlFor="phone">Phone</label>
               <input
@@ -158,6 +198,7 @@ export const RoomDetails = ({
                 value={formData.phone}
                 onChange={handleChange}
                 required
+                readOnly={disabled}
               />
             </div>
           </div>
@@ -170,8 +211,11 @@ export const RoomDetails = ({
               Close
             </button>
             <button
-              className="room-details-button button-reserve"
+              className={`room-details-button button-reserve ${
+                disabled ? "button-reserve-disabled" : ""
+              }`}
               type="submit"
+              disabled={disabled}
             >
               Reserve
             </button>
