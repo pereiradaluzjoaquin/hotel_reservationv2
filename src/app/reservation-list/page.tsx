@@ -1,6 +1,6 @@
 import { ReservationList } from "../components/ReservationList";
 
-export const Reservations = () => {
+const Reservations = () => {
   return (
     <div className="container">
       <h1>Reservation List</h1>

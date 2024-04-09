@@ -3,6 +3,8 @@ import RoomModel from "@/app/models/Room";
 import { dbConnect } from "@/dbConnect";
 import { NextRequest, NextResponse } from "next/server";
 
+export const dynamic = "force-dynamic";
+
 export const GET = async (request: NextRequest) => {
   await dbConnect();
   try {
