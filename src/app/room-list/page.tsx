@@ -3,7 +3,7 @@ import { Room } from "../models/Room";
 import "./page.css";
 
 const getAllRooms = async () => {
-  const response = await fetch("http://localhost:3000/api/rooms");
+  const response = await fetch(`${process.env.URL}/api/rooms`);
   if (!response.ok) {
     throw new Error("Error fetching rooms");
   }

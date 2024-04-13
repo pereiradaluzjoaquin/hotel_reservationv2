@@ -16,7 +16,6 @@ const RoomSchema = new Schema<Room>({
   description: { type: String, required: false },
 });
 
-// Crear el modelo basado en el esquema de la habitación
 const RoomModel = mongoose.models.Room || mongoose.model("Room", RoomSchema);
 
 export default RoomModel;
