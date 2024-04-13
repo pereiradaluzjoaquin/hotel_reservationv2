@@ -15,9 +15,7 @@ type RoomDetailsProps = {
 };
 
 const getReservationByRoomId = async (roomId: ObjectId) => {
-  const response = await fetch(
-    `http://localhost:3000/api/reservations/room/${roomId}`
-  );
+  const response = await fetch(`/api/reservations/room/${roomId}`);
   const data = await response.json();
   const { reservation } = data;
   return reservation as Reservation;
@@ -70,33 +68,27 @@ export const RoomDetails = ({
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const responseCustomer = await fetch(
-      "http://localhost:3000/api/customers",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      }
-    );
+    const responseCustomer = await fetch("/api/customers", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
     const data = await responseCustomer.json();
     const customer = data.customer as Customer;
-    const responseReservation = await fetch(
-      "http://localhost:3000/api/reservations",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          checkIn,
-          checkOut,
-          roomId: room._id,
-          customerId: customer._id,
-        }),
-      }
-    );
+    const responseReservation = await fetch("/api/reservations", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        checkIn,
+        checkOut,
+        roomId: room._id,
+        customerId: customer._id,
+      }),
+    });
     const dataReservation = await responseReservation.json();
     onClosed();
   };
