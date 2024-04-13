@@ -13,12 +13,12 @@ const getAllRooms = async () => {
 };
 
 const List = async () => {
-  const rooms = await getAllRooms();
+  /*   const rooms = await getAllRooms();
   return (
     <div className="container">
       <h1 className="room-list-title">Room List</h1>
       <RoomList rooms={rooms} checkIn="" checkOut="" noDetails={true} />
     </div>
-  );
+  ); */
 };
 export default List;
