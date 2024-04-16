@@ -25,8 +25,8 @@ export default function Home() {
 
   return (
     <main className="container">
-      <h1>Hotel Room Reservation</h1>
-      <p>Book a room today!</p>
+      <h1 style={{ textAlign: "center" }}>Hotel Room Reservation</h1>
+      <p style={{ textAlign: "center" }}>Book a room today!</p>
       <RoomReservation
         onRoomsReceived={handleRoomsReceived}
         loading={setLoading}

@@ -34,3 +34,9 @@
 .room-occupied {
   background-color: red;
 }
+
+@media screen and (max-width: 850px) {
+  .room-container {
+    margin-left: 40px;
+  }
+}
